@@ -2,18 +2,21 @@ Summary:	Jakarta Commons Digester - XML to Java object mapping
 Summary(pl):	Jakarta Commons Digester - odwzorowanie XML na obiekty Javy
 Name:		jakarta-commons-digester
 Version:	1.3
-Release:	1
+Release:	2
 License:	Apache
 Group:		Development/Languages/Java
 Source0:	http://jakarta.apache.org/builds/jakarta-commons/release/commons-digester/v%{version}/commons-digester-%{version}-src.tar.gz
 # Source0-md5:	0dafb55a57c4bd3b2a941d2961b139c8
 URL:		http://jakarta.apache.org/
 BuildRequires:	jakarta-ant
+BuildRequires:	jakarta-commons-beanutils
+BuildRequires:	jakarta-commons-collections
 BuildRequires:	jakarta-commons-logging
 BuildRequires:	jdk >= 1.2
 Requires:	jre >= 1.2
 Requires:	jakarta-commons-beanutils
 Requires:	jakarta-commons-collections
+Requires:	jakarta-commons-logging
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -51,10 +54,14 @@ Jakarta Commons Digester documentation.
 Dokumentacja do Jakarta Commons Digester.
 
 %prep
-%setup -q -c
+%setup -q -n commons-digester-%{version}-src
 
 %build
-cd commons-digester-%{version}-src
+cat << EOF > build.properties
+commons-beanutils.jar=%{_javalibdir}/commons-beanutils.jar
+commons-collections.jar=%{_javalibdir}/commons-collections.jar
+commons-logging.jar=%{_javalibdir}/commons-logging.jar
+EOF
 touch LICENSE
 cd digester
 ant dist
@@ -63,7 +70,6 @@ ant dist
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_javalibdir}
 
-cd commons-digester-%{version}-src
 install digester/dist/*.jar $RPM_BUILD_ROOT%{_javalibdir}
 
 %clean
@@ -71,9 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc commons-digester-%{version}-src/digester/LICENSE.txt
+%doc digester/LICENSE.txt
 %{_javalibdir}/*.jar
 
 %files doc
 %defattr(644,root,root,755)
-%doc commons-digester-%{version}-src/digester/dist/docs
+%doc digester/dist/docs
