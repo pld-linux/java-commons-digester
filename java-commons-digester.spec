@@ -1,5 +1,5 @@
 Summary:	Jakarta Commons Digester - XML to Java object mapping
-Summary(pl):	Jakarta Commons Digester - odwzorowanie XML na obiekty Javy
+Summary(pl):	Jakarta Commons Digester - odwzorowanie XML-a na obiekty Javy
 Name:		jakarta-commons-digester
 Version:	1.3
 Release:	2
@@ -34,7 +34,7 @@ differently.
 
 %description -l pl
 Zakresem dzia³ania komponentu Digester jest zorientowany g³ównie na
-odwzorowywanie XML na obiekty Javy.
+odwzorowywanie XML-a na obiekty Javy.
 
 Digester przetwarza strumieñ wej¶ciowy XML dopasowuj±c serie wzorców
 zagnie¿d¿ania elementów, aby wykonywaæ regu³y dodane przed
