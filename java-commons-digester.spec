@@ -6,6 +6,7 @@ Release:	1
 License:	Apache
 Group:		Development/Languages/Java
 Source0:	http://jakarta.apache.org/builds/jakarta-commons/release/commons-digester/v%{version}/commons-digester-%{version}-src.tar.gz
+# Source0-md5:	0dafb55a57c4bd3b2a941d2961b139c8
 URL:		http://jakarta.apache.org/
 BuildRequires:	jakarta-ant
 BuildRequires:	jakarta-commons-logging
