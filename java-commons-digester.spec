@@ -1,12 +1,12 @@
 Summary:	Jakarta Commons Digester - XML to Java object mapping
 Summary(pl):	Jakarta Commons Digester - odwzorowanie XML-a na obiekty Javy
 Name:		jakarta-commons-digester
-Version:	1.3
-Release:	2
+Version:	1.5
+Release:	1
 License:	Apache
 Group:		Development/Languages/Java
-Source0:	http://jakarta.apache.org/builds/jakarta-commons/release/commons-digester/v%{version}/commons-digester-%{version}-src.tar.gz
-# Source0-md5:	0dafb55a57c4bd3b2a941d2961b139c8
+Source0:	http://apache.org/dist/jakarta/commons/digester/source/commons-digester-%{version}-src.tar.gz
+# Source0-md5:	f678cc07c41c37b6ac4e63fe972f8364
 URL:		http://jakarta.apache.org/
 BuildRequires:	jakarta-ant
 BuildRequires:	jakarta-commons-beanutils
@@ -19,8 +19,6 @@ Requires:	jakarta-commons-collections
 Requires:	jakarta-commons-logging
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_javalibdir	/usr/share/java
 
 %description
 This scope of the Digester component is primarily oriented to XML ->
@@ -58,28 +56,27 @@ Dokumentacja do Jakarta Commons Digester.
 
 %build
 cat << EOF > build.properties
-commons-beanutils.jar=%{_javalibdir}/commons-beanutils.jar
-commons-collections.jar=%{_javalibdir}/commons-collections.jar
-commons-logging.jar=%{_javalibdir}/commons-logging.jar
+commons-beanutils.jar=%{_javadir}/commons-beanutils.jar
+commons-collections.jar=%{_javadir}/commons-collections.jar
+commons-logging.jar=%{_javadir}/commons-logging.jar
 EOF
 touch LICENSE
-cd digester
 ant dist
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_javalibdir}
+install -d $RPM_BUILD_ROOT%{_javadir}
 
-install digester/dist/*.jar $RPM_BUILD_ROOT%{_javalibdir}
+install dist/*.jar $RPM_BUILD_ROOT%{_javadir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc digester/LICENSE.txt
-%{_javalibdir}/*.jar
+%doc LICENSE.txt
+%{_javadir}/*.jar
 
 %files doc
 %defattr(644,root,root,755)
-%doc digester/dist/docs
+%doc dist/docs
