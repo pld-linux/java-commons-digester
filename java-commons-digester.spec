@@ -1,22 +1,22 @@
 Summary:	Jakarta Commons Digester - XML to Java object mapping
 Summary(pl):	Jakarta Commons Digester - odwzorowanie XML-a na obiekty Javy
 Name:		jakarta-commons-digester
-Version:	1.5
+Version:	1.6
 Release:	1
-License:	Apache
+License:	Apache v2.0
 Group:		Development/Languages/Java
-Source0:	http://apache.org/dist/jakarta/commons/digester/source/commons-digester-%{version}-src.tar.gz
-# Source0-md5:	f678cc07c41c37b6ac4e63fe972f8364
-URL:		http://jakarta.apache.org/
+Source0:	http://www.apache.org/dist/jakarta/commons/digester/source/commons-digester-%{version}-src.tar.gz
+# Source0-md5:	1bdc6d353a28c1944a4699c8b1cce065
+URL:		http://jakarta.apache.org/commons/digester/
 BuildRequires:	jakarta-ant
 BuildRequires:	jakarta-commons-beanutils
 BuildRequires:	jakarta-commons-collections
 BuildRequires:	jakarta-commons-logging
 BuildRequires:	jdk >= 1.2
-Requires:	jre >= 1.2
 Requires:	jakarta-commons-beanutils
 Requires:	jakarta-commons-collections
 Requires:	jakarta-commons-logging
+Requires:	jre >= 1.2
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -74,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE.txt
+%doc LICENSE.txt PROPOSAL.html RELEASE-NOTES.txt STATUS.html
 %{_javadir}/*.jar
 
 %files doc
