@@ -8,7 +8,7 @@ Group:		Development/Languages/Java
 Source0:	http://www.apache.org/dist/jakarta/commons/digester/source/commons-digester-%{version}-src.tar.gz
 # Source0-md5:	718f91f6958da865826bca455f644076
 URL:		http://jakarta.apache.org/commons/digester/
-BuildRequires:	jakarta-ant
+BuildRequires:	ant
 BuildRequires:	jakarta-commons-beanutils
 BuildRequires:	jakarta-commons-collections
 BuildRequires:	jakarta-commons-logging
