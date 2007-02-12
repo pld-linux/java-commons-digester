@@ -1,5 +1,5 @@
 Summary:	Jakarta Commons Digester - XML to Java object mapping
-Summary(pl):	Jakarta Commons Digester - odwzorowanie XML-a na obiekty Javy
+Summary(pl.UTF-8):   Jakarta Commons Digester - odwzorowanie XML-a na obiekty Javy
 Name:		jakarta-commons-digester
 Version:	1.7
 Release:	1
@@ -30,25 +30,25 @@ to the start of parsing. This package was inspired by the XmlMapper
 class that was part of Tomcat 3.0 and 3.1, but is organized somewhat
 differently.
 
-%description -l pl
-Zakresem dzia³ania komponentu Digester jest zorientowany g³ównie na
+%description -l pl.UTF-8
+Zakresem dziaÅ‚ania komponentu Digester jest zorientowany gÅ‚Ã³wnie na
 odwzorowywanie XML-a na obiekty Javy.
 
-Digester przetwarza strumieñ wej¶ciowy XML dopasowuj±c serie wzorców
-zagnie¿d¿ania elementów, aby wykonywaæ regu³y dodane przed
-rozpoczêciem analizy. Ten pakiet by³ zainspirowany klas± XmlMapper,
-która by³a czê¶ci± Tomcata 3.0 i 3.1, ale jest zorganizowany nieco
+Digester przetwarza strumieÅ„ wejÅ›ciowy XML dopasowujÄ…c serie wzorcÃ³w
+zagnieÅ¼dÅ¼ania elementÃ³w, aby wykonywaÄ‡ reguÅ‚y dodane przed
+rozpoczÄ™ciem analizy. Ten pakiet byÅ‚ zainspirowany klasÄ… XmlMapper,
+ktÃ³ra byÅ‚a czÄ™Å›ciÄ… Tomcata 3.0 i 3.1, ale jest zorganizowany nieco
 inaczej.
 
 %package doc
 Summary:	Jakarta Commons Digester documentation
-Summary(pl):	Dokumentacja do Jakarta Commons Digester
+Summary(pl.UTF-8):   Dokumentacja do Jakarta Commons Digester
 Group:		Development/Languages/Java
 
 %description doc
 Jakarta Commons Digester documentation.
 
-%description doc -l pl
+%description doc -l pl.UTF-8
 Dokumentacja do Jakarta Commons Digester.
 
 %prep
