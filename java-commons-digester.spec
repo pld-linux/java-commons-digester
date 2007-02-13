@@ -1,5 +1,5 @@
 Summary:	Jakarta Commons Digester - XML to Java object mapping
-Summary(pl.UTF-8):   Jakarta Commons Digester - odwzorowanie XML-a na obiekty Javy
+Summary(pl.UTF-8):	Jakarta Commons Digester - odwzorowanie XML-a na obiekty Javy
 Name:		jakarta-commons-digester
 Version:	1.7
 Release:	1
@@ -42,7 +42,7 @@ inaczej.
 
 %package doc
 Summary:	Jakarta Commons Digester documentation
-Summary(pl.UTF-8):   Dokumentacja do Jakarta Commons Digester
+Summary(pl.UTF-8):	Dokumentacja do Jakarta Commons Digester
 Group:		Development/Languages/Java
 
 %description doc
