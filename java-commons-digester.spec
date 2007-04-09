@@ -45,7 +45,7 @@ inaczej.
 %package javadoc
 Summary:	Jakarta Commons Digester documentation
 Summary(pl.UTF-8):	Dokumentacja do Jakarta Commons Digester
-Group:		Development/Languages/Java
+Group:		Documentation
 Obsoletes:	jakarta-commons-digester-doc
 
 %description javadoc
