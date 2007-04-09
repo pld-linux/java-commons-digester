@@ -13,6 +13,8 @@ BuildRequires:	jakarta-commons-beanutils
 BuildRequires:	jakarta-commons-collections
 BuildRequires:	jakarta-commons-logging
 BuildRequires:	jdk >= 1.2
+BuildRequires:	jpackage-utils
+BuildRequires:	rpmbuild(macros) >= 1.300
 Requires:	jakarta-commons-beanutils
 Requires:	jakarta-commons-collections
 Requires:	jakarta-commons-logging
@@ -40,43 +42,57 @@ rozpoczęciem analizy. Ten pakiet był zainspirowany klasą XmlMapper,
 która była częścią Tomcata 3.0 i 3.1, ale jest zorganizowany nieco
 inaczej.
 
-%package doc
+%package javadoc
 Summary:	Jakarta Commons Digester documentation
 Summary(pl.UTF-8):	Dokumentacja do Jakarta Commons Digester
 Group:		Development/Languages/Java
+Obsoletes:	%{name}-doc
 
-%description doc
+%description javadoc
 Jakarta Commons Digester documentation.
 
-%description doc -l pl.UTF-8
+%description javadoc -l pl.UTF-8
 Dokumentacja do Jakarta Commons Digester.
 
 %prep
 %setup -q -n commons-digester-%{version}-src
 
 %build
-cat << EOF > build.properties
-commons-beanutils.jar=%{_javadir}/commons-beanutils.jar
-commons-collections.jar=%{_javadir}/commons-collections.jar
-commons-logging.jar=%{_javadir}/commons-logging.jar
-EOF
-touch LICENSE
-ant dist
+required_jars="commons-beanutils commons-collections commons-logging"
+export CLASSPATH=$(/usr/bin/build-classpath $required_jars)
+%ant dist
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_javadir}
 
-install dist/*.jar $RPM_BUILD_ROOT%{_javadir}
+for a in dist/*.jar; do
+	jar=${a##*/}
+	cp -a dist/$jar $RPM_BUILD_ROOT%{_javadir}/${jar%%.jar}-%{version}.jar
+	ln -s ${jar%%.jar}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/$jar
+done
+
+# javadoc
+install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+cp -pr dist/docs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post javadoc
+rm -f %{_javadocdir}/%{name}
+ln -s %{name}-%{version} %{_javadocdir}/%{name}
+
+%postun javadoc
+if [ "$1" = "0" ]; then
+	rm -f %{_javadocdir}/%{name}
+fi
 
 %files
 %defattr(644,root,root,755)
 %doc LICENSE.txt RELEASE-NOTES.txt
 %{_javadir}/*.jar
 
-%files doc
+%files javadoc
 %defattr(644,root,root,755)
-%doc dist/docs
+%{_javadocdir}/%{name}-%{version}
