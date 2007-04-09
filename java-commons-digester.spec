@@ -46,7 +46,7 @@ inaczej.
 Summary:	Jakarta Commons Digester documentation
 Summary(pl.UTF-8):	Dokumentacja do Jakarta Commons Digester
 Group:		Development/Languages/Java
-Obsoletes:	%{name}-doc
+Obsoletes:	jakarta-commons-digester-doc
 
 %description javadoc
 Jakarta Commons Digester documentation.
