@@ -1,3 +1,4 @@
+%include	/usr/lib/rpm/macros.java
 Summary:	Jakarta Commons Digester - XML to Java object mapping
 Summary(pl.UTF-8):	Jakarta Commons Digester - odwzorowanie XML-a na obiekty Javy
 Name:		jakarta-commons-digester
@@ -14,11 +15,12 @@ BuildRequires:	jakarta-commons-collections
 BuildRequires:	jakarta-commons-logging
 BuildRequires:	jdk >= 1.2
 BuildRequires:	jpackage-utils
+BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 Requires:	jakarta-commons-beanutils
 Requires:	jakarta-commons-collections
 Requires:	jakarta-commons-logging
-Requires:	jre >= 1.2
+Requires:	jpackage-utils
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -59,7 +61,8 @@ Dokumentacja do Jakarta Commons Digester.
 
 %build
 required_jars="commons-beanutils commons-collections commons-logging"
-export CLASSPATH=$(/usr/bin/build-classpath $required_jars)
+CLASSPATH=$(build-classpath $required_jars)
+export CLASSPATH
 %ant dist
 
 %install
@@ -74,19 +77,14 @@ done
 
 # javadoc
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cp -pr dist/docs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+cp -a dist/docs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post javadoc
-rm -f %{_javadocdir}/%{name}
-ln -s %{name}-%{version} %{_javadocdir}/%{name}
-
-%postun javadoc
-if [ "$1" = "0" ]; then
-	rm -f %{_javadocdir}/%{name}
-fi
+ln -nfs %{name}-%{version} %{_javadocdir}/%{name}
 
 %files
 %defattr(644,root,root,755)
@@ -96,3 +94,4 @@ fi
 %files javadoc
 %defattr(644,root,root,755)
 %{_javadocdir}/%{name}-%{version}
+%ghost %{_javadocdir}/%{name}
