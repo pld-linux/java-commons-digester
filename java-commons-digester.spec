@@ -1,11 +1,15 @@
+#
+# Conditional build:
+%bcond_without	javadoc		# don't build javadoc
+
 %include	/usr/lib/rpm/macros.java
 Summary:	Jakarta Commons Digester - XML to Java object mapping
 Summary(pl.UTF-8):	Jakarta Commons Digester - odwzorowanie XML-a na obiekty Javy
-Name:		jakarta-commons-digester
+Name:		java-commons-digester
 Version:	1.7
 Release:	2
 License:	Apache v2.0
-Group:		Development/Languages/Java
+Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/jakarta/commons/digester/source/commons-digester-%{version}-src.tar.gz
 # Source0-md5:	718f91f6958da865826bca455f644076
 URL:		http://jakarta.apache.org/commons/digester/
@@ -21,6 +25,8 @@ Requires:	jakarta-commons-beanutils
 Requires:	jakarta-commons-collections
 Requires:	jakarta-commons-logging
 Requires:	jpackage-utils
+Provides:	jakarta-commons-digester
+Obsoletes:	jakarta-commons-digester
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -74,9 +80,11 @@ cp -a dist/commons-digester.jar $RPM_BUILD_ROOT%{_javadir}/commons-digester-%{ve
 ln -s commons-digester-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-digester.jar
 
 # javadoc
+%if %{with javadoc}
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 cp -a dist/docs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -89,7 +97,9 @@ ln -nfs %{name}-%{version} %{_javadocdir}/%{name}
 %doc LICENSE.txt RELEASE-NOTES.txt
 %{_javadir}/*.jar
 
+%if %{with javadoc}
 %files javadoc
 %defattr(644,root,root,755)
 %{_javadocdir}/%{name}-%{version}
 %ghost %{_javadocdir}/%{name}
+%endif
