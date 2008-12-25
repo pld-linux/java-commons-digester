@@ -12,7 +12,7 @@ License:	Apache v2.0
 Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/commons/digester/source/commons-digester-%{version}-src.tar.gz
 # Source0-md5:	718f91f6958da865826bca455f644076
-URL:		http://commons.apache.org/commons/digester/
+URL:		http://commons.apache.org/digester/
 BuildRequires:	ant
 BuildRequires:	java-commons-beanutils
 BuildRequires:	java-commons-collections
