@@ -3,27 +3,27 @@
 %bcond_without	javadoc		# don't build javadoc
 
 %include	/usr/lib/rpm/macros.java
-Summary:	Jakarta Commons Digester - XML to Java object mapping
-Summary(pl.UTF-8):	Jakarta Commons Digester - odwzorowanie XML-a na obiekty Javy
+Summary:	Commons Digester - XML to Java object mapping
+Summary(pl.UTF-8):	Commons Digester - odwzorowanie XML-a na obiekty Javy
 Name:		java-commons-digester
 Version:	1.7
 Release:	2
 License:	Apache v2.0
 Group:		Libraries/Java
-Source0:	http://www.apache.org/dist/jakarta/commons/digester/source/commons-digester-%{version}-src.tar.gz
+Source0:	http://www.apache.org/dist/commons/digester/source/commons-digester-%{version}-src.tar.gz
 # Source0-md5:	718f91f6958da865826bca455f644076
-URL:		http://jakarta.apache.org/commons/digester/
+URL:		http://commons.apache.org/commons/digester/
 BuildRequires:	ant
-BuildRequires:	jakarta-commons-beanutils
-BuildRequires:	jakarta-commons-collections
-BuildRequires:	jakarta-commons-logging
+BuildRequires:	java-commons-beanutils
+BuildRequires:	java-commons-collections
+BuildRequires:	java-commons-logging
 BuildRequires:	jdk >= 1.2
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
-Requires:	jakarta-commons-beanutils
-Requires:	jakarta-commons-collections
-Requires:	jakarta-commons-logging
+Requires:	java-commons-beanutils
+Requires:	java-commons-collections
+Requires:	java-commons-logging
 Requires:	jpackage-utils
 Provides:	jakarta-commons-digester
 Obsoletes:	jakarta-commons-digester
@@ -51,16 +51,16 @@ która była częścią Tomcata 3.0 i 3.1, ale jest zorganizowany nieco
 inaczej.
 
 %package javadoc
-Summary:	Jakarta Commons Digester documentation
-Summary(pl.UTF-8):	Dokumentacja do Jakarta Commons Digester
+Summary:	Commons Digester documentation
+Summary(pl.UTF-8):	Dokumentacja do Commons Digester
 Group:		Documentation
 Obsoletes:	jakarta-commons-digester-doc
 
 %description javadoc
-Jakarta Commons Digester documentation.
+Commons Digester documentation.
 
 %description javadoc -l pl.UTF-8
-Dokumentacja do Jakarta Commons Digester.
+Dokumentacja do Commons Digester.
 
 %prep
 %setup -q -n commons-digester-%{version}-src
