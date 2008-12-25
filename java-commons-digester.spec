@@ -54,7 +54,9 @@ inaczej.
 Summary:	Commons Digester documentation
 Summary(pl.UTF-8):	Dokumentacja do Commons Digester
 Group:		Documentation
+Provides:	jakarta-commons-digester-javadoc
 Obsoletes:	jakarta-commons-digester-doc
+Obsoletes:	jakarta-commons-digester-javadoc
 
 %description javadoc
 Commons Digester documentation.
