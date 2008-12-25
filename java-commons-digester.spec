@@ -66,7 +66,7 @@ Dokumentacja do Jakarta Commons Digester.
 %setup -q -n commons-digester-%{version}-src
 
 %build
-required_jars="commons-beanutils commons-collections commons-logging"
+required_jars="commons-beanutils-core commons-collections commons-logging"
 CLASSPATH=$(build-classpath $required_jars)
 export CLASSPATH
 %ant dist
