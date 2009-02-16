@@ -3,11 +3,13 @@
 %bcond_without	javadoc		# don't build javadoc
 
 %include	/usr/lib/rpm/macros.java
+
+%define		srcname commmons-digester
 Summary:	Commons Digester - XML to Java object mapping
 Summary(pl.UTF-8):	Commons Digester - odwzorowanie XML-a na obiekty Javy
 Name:		java-commons-digester
 Version:	1.7
-Release:	2
+Release:	3
 License:	Apache v2.0
 Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/commons/digester/source/commons-digester-%{version}-src.tar.gz
@@ -17,7 +19,7 @@ BuildRequires:	ant
 BuildRequires:	java-commons-beanutils
 BuildRequires:	java-commons-collections
 BuildRequires:	java-commons-logging
-BuildRequires:	jdk >= 1.2
+BuildRequires:	java-gcj-compat-devel
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
@@ -71,7 +73,12 @@ Dokumentacja do Commons Digester.
 required_jars="commons-beanutils-core commons-collections commons-logging"
 CLASSPATH=$(build-classpath $required_jars)
 export CLASSPATH
-%ant dist
+export SHELL=/bin/sh
+%ant clean
+%ant -Dbuild.compiler=extJavac dist javadoc
+
+%if %{with javadoc}
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -83,25 +90,25 @@ ln -s commons-digester-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-digeste
 
 # javadoc
 %if %{with javadoc}
-install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cp -a dist/docs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
+install -d $RPM_BUILD_ROOT%{_javadocdir}/%{srcname}-%{version}
+cp -a dist/docs/* $RPM_BUILD_ROOT%{_javadocdir}/%{srcname}-%{version}
+ln -s %{srcname}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{srcname} # ghost symlink
 %endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post javadoc
-ln -nfs %{name}-%{version} %{_javadocdir}/%{name}
+ln -nfs %{srcname}-%{version} %{_javadocdir}/%{srcname}
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE.txt RELEASE-NOTES.txt
+%doc RELEASE-NOTES.txt
 %{_javadir}/*.jar
 
 %if %{with javadoc}
 %files javadoc
 %defattr(644,root,root,755)
-%{_javadocdir}/%{name}-%{version}
-%ghost %{_javadocdir}/%{name}
+%{_javadocdir}/%{srcname}-%{version}
+%ghost %{_javadocdir}/%{srcname}
 %endif
