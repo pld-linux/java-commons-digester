@@ -1,6 +1,11 @@
 #
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
+%bcond_with     java_sun        # build with java-sun
+
+%if "%{pld_release}" == "ti"
+%define		with_java_sun
+%else
 
 %include	/usr/lib/rpm/macros.java
 
@@ -19,7 +24,8 @@ BuildRequires:	ant
 BuildRequires:	java-commons-beanutils
 BuildRequires:	java-commons-collections
 BuildRequires:	java-commons-logging
-BuildRequires:	java-gcj-compat-devel
+%{!?with_java_sun:BuildRequires:	java-gcj-compat-devel}
+%{?with_java_sun:BuildRequires:	java-sun}
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
@@ -73,12 +79,8 @@ Dokumentacja do Commons Digester.
 required_jars="commons-beanutils-core commons-collections commons-logging"
 CLASSPATH=$(build-classpath $required_jars)
 export CLASSPATH
-export SHELL=/bin/sh
-%ant clean
-%ant -Dbuild.compiler=extJavac dist javadoc
 
-%if %{with javadoc}
-%endif
+%ant clean dist
 
 %install
 rm -rf $RPM_BUILD_ROOT
