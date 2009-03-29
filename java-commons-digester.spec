@@ -5,7 +5,7 @@
 
 %if "%{pld_release}" == "ti"
 %define		with_java_sun
-%else
+%endif
 
 %include	/usr/lib/rpm/macros.java
 
