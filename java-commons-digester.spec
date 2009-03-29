@@ -4,7 +4,7 @@
 %bcond_with     java_sun        # build with java-sun
 
 %if "%{pld_release}" == "ti"
-%define		with_java_sun
+%define		with_java_sun	1
 %endif
 
 %include	/usr/lib/rpm/macros.java
