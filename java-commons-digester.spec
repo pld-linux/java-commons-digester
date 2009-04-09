@@ -4,7 +4,9 @@
 %bcond_with     java_sun        # build with java-sun
 
 %if "%{pld_release}" == "ti"
-%define		with_java_sun	1
+%bcond_without	java_sun	# build with gcj
+%else
+%bcond_with	java_sun	# build with java-sun
 %endif
 
 %include	/usr/lib/rpm/macros.java
@@ -17,7 +19,7 @@ Version:	1.7
 Release:	3
 License:	Apache v2.0
 Group:		Libraries/Java
-Source0:	http://www.apache.org/dist/commons/digester/source/commons-digester-%{version}-src.tar.gz
+Source0:	http://www.apache.org/dist/commons/digester/source/%{srcname}-%{version}-src.tar.gz
 # Source0-md5:	718f91f6958da865826bca455f644076
 URL:		http://commons.apache.org/digester/
 BuildRequires:	ant
@@ -27,6 +29,7 @@ BuildRequires:	java-commons-logging
 %{!?with_java_sun:BuildRequires:	java-gcj-compat-devel}
 %{?with_java_sun:BuildRequires:	java-sun}
 BuildRequires:	jpackage-utils
+BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 Requires:	java-commons-beanutils
@@ -73,7 +76,7 @@ Commons Digester documentation.
 Dokumentacja do Commons Digester.
 
 %prep
-%setup -q -n commons-digester-%{version}-src
+%setup -q -n %{srcname}-%{version}-src
 
 %build
 required_jars="commons-beanutils-core commons-collections commons-logging"
@@ -87,8 +90,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_javadir}
 
 # jars
-cp -a dist/commons-digester.jar $RPM_BUILD_ROOT%{_javadir}/commons-digester-%{version}.jar
-ln -s commons-digester-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/commons-digester.jar
+cp -a dist/%{srcname}.jar $RPM_BUILD_ROOT%{_javadir}/%{srcname}-%{version}.jar
+ln -s %{srcname}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{srcname}.jar
 
 # javadoc
 %if %{with javadoc}
