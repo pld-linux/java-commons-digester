@@ -1,5 +1,3 @@
-# TODO:
-# - does not pass tests
 #
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
@@ -18,19 +16,21 @@ Summary:	Commons Digester - XML to Java object mapping
 Summary(pl.UTF-8):	Commons Digester - odwzorowanie XML-a na obiekty Javy
 Name:		java-commons-digester
 Version:	1.8.1
-Release:	0.1
+Release:	1
 License:	Apache v2.0
 Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/commons/digester/source/%{srcname}-%{version}-src.tar.gz
 # Source0-md5:	bf069f1d8908a66cb732a5c4260c86b7
 URL:		http://commons.apache.org/digester/
 BuildRequires:	ant
+BuildRequires:	ant-junit
 BuildRequires:	java-commons-beanutils
 BuildRequires:	java-commons-collections
 BuildRequires:	java-commons-logging
 %{!?with_java_sun:BuildRequires:	java-gcj-compat-devel}
 %{?with_java_sun:BuildRequires:	java-sun}
 BuildRequires:	jpackage-utils
+BuildRequires:	junit
 BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
