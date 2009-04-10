@@ -82,10 +82,8 @@ Dokumentacja do Commons Digester.
 
 %build
 required_jars="commons-beanutils-core commons-collections commons-logging"
-CLASSPATH=$(build-classpath $required_jars)
-export CLASSPATH
-
-%ant clean dist
+CLASSPATH=$(build-classpath $required_jars):target/classes:target/tests
+%ant -Dbuild.sysclasspath=only clean dist
 
 %install
 rm -rf $RPM_BUILD_ROOT
